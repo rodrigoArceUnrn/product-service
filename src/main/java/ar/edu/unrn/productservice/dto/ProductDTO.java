@@ -8,7 +8,7 @@ public class ProductDTO {
     private Long id;
     private String title;
     private LocalDateTime exitDate;
-    private Float price;
+    private Float amount;
     private String image;
     private String format;
     private String status;
@@ -44,12 +44,12 @@ public class ProductDTO {
         this.exitDate = exitDate;
     }
 
-    public Float getPrice() {
-        return price;
+    public Float getAmount() {
+        return amount;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setAmount(Float amount) {
+        this.amount = amount;
     }
 
     public String getImage() {

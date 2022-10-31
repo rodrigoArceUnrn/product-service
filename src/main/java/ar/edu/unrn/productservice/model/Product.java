@@ -13,9 +13,13 @@ public class Product {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
     private String title;
+
     @Column(name = "exit_date")
     private LocalDateTime exitDate;
-    private Float price;
+
+    @Column(name = "amount")
+    private Float amount;
+
     private String image;
     private String format;
     private String status;
@@ -65,12 +69,12 @@ public class Product {
         this.exitDate = exitDate;
     }
 
-    public Float getPrice() {
-        return price;
+    public Float getAmount() {
+        return amount;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setAmount(Float amount) {
+        this.amount = amount;
     }
 
     public String getImage() {

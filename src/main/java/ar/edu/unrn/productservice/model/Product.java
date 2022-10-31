@@ -38,6 +38,9 @@ public class Product {
     )
     private List<Discount> discountList;
 
+    private Float average;
+
+
     public Product() {
     }
 
@@ -127,5 +130,13 @@ public class Product {
 
     public void setDiscountList(List<Discount> discountList) {
         this.discountList = discountList;
+    }
+
+    public Float getAverage() {
+        return average;
+    }
+
+    public void setAverage(Float average) {
+        this.average = average;
     }
 }

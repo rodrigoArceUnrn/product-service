@@ -20,6 +20,8 @@ public class ProductDTO {
 
     private List<DiscountDTO> discountList;
 
+    private Float average;
+
     public Long getId() {
         return id;
     }

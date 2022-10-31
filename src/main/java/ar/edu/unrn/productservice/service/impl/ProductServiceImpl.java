@@ -32,8 +32,18 @@ public class ProductServiceImpl implements ProductService {
         return page.map(this::convertToDTO);
     }
 
+    @Override
+    public ProductDTO update(ProductDTO productDTO) {
+        Product product = productRepository.save(convertToEntity(productDTO));
+        return convertToDTO(product);
+    }
+
 
     private ProductDTO convertToDTO(Product product) {
         return modelMapper.map(product, ProductDTO.class);
+    }
+
+    private Product convertToEntity(ProductDTO productDTO) {
+        return modelMapper.map(productDTO, Product.class);
     }
 }

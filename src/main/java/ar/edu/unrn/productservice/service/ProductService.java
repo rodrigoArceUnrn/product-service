@@ -10,4 +10,6 @@ public interface ProductService {
     ProductDTO getProductById(Long id) throws ProductUnknownException;
 
     Page<ProductDTO> getProducts(Pageable pageable);
+
+    ProductDTO update(ProductDTO productDTO);
 }

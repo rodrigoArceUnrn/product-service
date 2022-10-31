@@ -20,6 +20,8 @@ public class ProductDTO {
 
     private List<DiscountDTO> discountList;
 
+    private Float average;
+
     public Long getId() {
         return id;
     }
@@ -106,5 +108,13 @@ public class ProductDTO {
 
     public void setDiscountList(List<DiscountDTO> discountList) {
         this.discountList = discountList;
+    }
+
+    public Float getAverage() {
+        return average;
+    }
+
+    public void setAverage(Float average) {
+        this.average = average;
     }
 }

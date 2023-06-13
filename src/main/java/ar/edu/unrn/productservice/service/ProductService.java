@@ -11,5 +11,5 @@ public interface ProductService {
 
     Page<ProductDTO> getProducts(Pageable pageable);
 
-    ProductDTO update(ProductDTO productDTO);
+    void update(ProductDTO productDTO);
 }

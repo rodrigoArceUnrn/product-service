@@ -6,7 +6,6 @@ import ar.edu.unrn.productservice.model.Product;
 import ar.edu.unrn.productservice.repository.ProductRepository;
 import ar.edu.unrn.productservice.service.ProductService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,10 +13,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
+    final
     ProductRepository productRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
+        this.productRepository = productRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public ProductDTO getProductById(Long id) throws ProductUnknownException {
@@ -33,9 +36,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO update(ProductDTO productDTO) {
-        Product product = productRepository.save(convertToEntity(productDTO));
-        return convertToDTO(product);
+    public void update(ProductDTO productDTO) {
+        productRepository.save(convertToEntity(productDTO));
     }
 
 

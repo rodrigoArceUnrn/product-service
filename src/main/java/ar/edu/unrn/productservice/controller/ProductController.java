@@ -2,7 +2,6 @@ package ar.edu.unrn.productservice.controller;
 
 import ar.edu.unrn.productservice.dto.ProductDTO;
 import ar.edu.unrn.productservice.exception.ProductUnknownException;
-import ar.edu.unrn.productservice.security.jwt.JwtProvider;
 import ar.edu.unrn.productservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.data.domain.Pageable;
@@ -20,15 +19,11 @@ public class ProductController {
     final
     ProductService productService;
 
-    final
-    JwtProvider jwtProvider;
 
-    public ProductController(ProductService productService, JwtProvider jwtProvider) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.jwtProvider = jwtProvider;
     }
 
-    // @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getProduct(@PathVariable Long id) {
         try {
@@ -47,7 +42,6 @@ public class ProductController {
         }
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping()
     @Operation(summary = "Update product")
     public ResponseEntity<?> updateProduct(@RequestBody ProductDTO productDTO) {

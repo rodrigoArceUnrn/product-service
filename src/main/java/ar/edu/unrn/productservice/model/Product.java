@@ -6,12 +6,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
-    private Long id;
     private String title;
 
     @Column(name = "exit_date")
@@ -46,14 +42,6 @@ public class Product {
 
 
     public Product() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

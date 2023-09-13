@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
     final
     ProductRepository productRepository;
     private final ModelMapper modelMapper;
@@ -39,7 +38,6 @@ public class ProductServiceImpl implements ProductService {
     public void update(ProductDTO productDTO) {
         productRepository.save(convertToEntity(productDTO));
     }
-
 
     private ProductDTO convertToDTO(Product product) {
         return modelMapper.map(product, ProductDTO.class);

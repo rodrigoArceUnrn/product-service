@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,12 +20,13 @@ public class ProductController {
     final
     ProductService productService;
 
-
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get product by id")
+    @PreAuthorize("hasRole('ROLE_CLIENTE')")
     public ResponseEntity<?> getProduct(@PathVariable Long id) {
         try {
             return ResponseEntity.ok().body(productService.getProductById(id));
@@ -34,16 +36,15 @@ public class ProductController {
     }
 
     @GetMapping()
+    @Operation(summary = "Get products")
+    @PreAuthorize("hasRole('ROLE_CLIENTE')")
     public ResponseEntity<?> getProducts(@PageableDefault Pageable pageable) {
-        try {
-            return ResponseEntity.ok().body(productService.getProducts(pageable));
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-        }
+        return ResponseEntity.ok(productService.getProducts(pageable));
     }
 
     @PutMapping()
     @Operation(summary = "Update product")
+    @PreAuthorize("hasRole('ROLE_CLIENTE')")
     public ResponseEntity<?> updateProduct(@RequestBody ProductDTO productDTO) {
         try {
             productService.update(productDTO);
@@ -52,6 +53,4 @@ public class ProductController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
-
-
 }

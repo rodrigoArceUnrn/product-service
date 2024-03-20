@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "discounts")
-public class Discount extends BaseEntity{
+public class Discount extends BaseEntity {
 
     private String name;
 

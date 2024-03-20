@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/public/**").permitAll()
-                .antMatchers("/products/**").hasRole("CLIENTE")
+                .antMatchers("/products/").permitAll()
                 .and()
                 .addFilterBefore(new JwtTokenValidationFilter(jwtUtil, jwtConfig), UsernamePasswordAuthenticationFilter.class);
     }

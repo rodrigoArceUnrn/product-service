@@ -26,7 +26,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get product by id")
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<?> getProduct(@PathVariable Long id) {
         try {
             return ResponseEntity.ok().body(productService.getProductById(id));
@@ -37,7 +37,7 @@ public class ProductController {
 
     @GetMapping()
     @Operation(summary = "Get products")
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<?> getProducts(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(productService.getProducts(pageable));
     }

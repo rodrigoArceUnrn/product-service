@@ -1,11 +1,14 @@
 package ar.edu.unrn.productservice.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
 @Table(name = "genders")
-public class Gender extends BaseEntity{
+public class Gender extends BaseEntity {
 
     private String description;
 

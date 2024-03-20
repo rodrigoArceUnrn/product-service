@@ -27,15 +27,27 @@ public class JwtTokenValidationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        String token = extractTokenFromRequest(request);
 
-        if (token != null && jwtUtil.validateToken(token)) {
-            UserDetails userDetails = jwtUtil.extractUserDetails(token);
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        logger.error("CORS filter: " + request.getMethod());
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Max-Age", "86400");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, xsrf-token");
+        response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+        if ("OPTIONS".equals(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        } else {
+            String token = extractTokenFromRequest(request);
+
+            if (token != null && jwtUtil.validateToken(token)) {
+                UserDetails userDetails = jwtUtil.extractUserDetails(token);
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+            chain.doFilter(request, response);
         }
-        chain.doFilter(request, response);
     }
 
     private String extractTokenFromRequest(HttpServletRequest request) {

@@ -4,8 +4,4 @@ public class ProductUnknownException extends Throwable {
     public ProductUnknownException(String message) {
         super(message);
     }
-
-    public ProductUnknownException() {
-        super();
-    }
 }
